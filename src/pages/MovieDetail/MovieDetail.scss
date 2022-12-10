@@ -29,6 +29,7 @@
 
 	&__poster {
 		min-width: 20rem;
+		max-width: 25rem;
 		height: auto;
 		margin-right: 4rem;
 
@@ -56,6 +57,7 @@
 		align-items: center;
 		margin-bottom: 2rem;
 		gap: 2rem;
+		flex-wrap: wrap;
 
 		&--star {
 			i {
@@ -117,12 +119,12 @@
 		justify-content: center;
 
 		margin-top: 5rem;
-		margin-bottom: 10rem;
 	}
 
 	&__trailer {
 		display: flex;
 		flex-direction: column;
+		margin-bottom: 5rem;
 
 		&--title {
 			font-size: 2.5rem;
@@ -138,5 +140,19 @@
 			align-items: center;
 			justify-content: center;
 		}
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.movieDetail__desc,
+	.movieDetail__list {
+		display: none;
+	}
+
+	.movieDetail__poster {
+		min-width: 10rem;
+		max-width: 15rem;
+		height: auto;
+		margin-right: 2rem;
 	}
 }

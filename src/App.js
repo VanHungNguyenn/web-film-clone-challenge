@@ -14,15 +14,18 @@ function App() {
 				<Routes>
 					<Route path='/' element={<DefaultLayout />}>
 						<Route path='/' element={<Homepage />} />
-						<Route path='movie' element={<Catalog />} />
-						<Route path='tv-show' element={<Catalog />} />
-						<Route path='movie/search/:key' element={<Catalog />} />
+						<Route path='/movie' element={<Catalog />} />
+						<Route path='/tv' element={<Catalog />} />
 						<Route
-							path='tv-show/search/:key'
+							path='/movie/search/:keyword'
 							element={<Catalog />}
 						/>
-						<Route path='movie/:id' element={<MovieDetail />} />
-						<Route path='tv-show/:id' element={<MovieDetail />} />
+						<Route
+							path='/tv/search/:keyword'
+							element={<Catalog />}
+						/>
+						<Route path='/movie/:id' element={<MovieDetail />} />
+						<Route path='/tv/:id' element={<MovieDetail />} />
 						<Route path='*' element={<Page404 />} />
 					</Route>
 				</Routes>

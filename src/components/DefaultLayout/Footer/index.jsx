@@ -2,7 +2,7 @@ import React from 'react'
 import './Footer.scss'
 import { Link } from 'react-router-dom'
 
-import { logo } from '~/constants'
+import { logo, facebookLink, githubLink, linkedInLink } from '~/constants'
 
 const Footer = () => {
 	return (
@@ -20,7 +20,7 @@ const Footer = () => {
 							<Link to='/movie'>Movie</Link>
 						</li>
 						<li className='footer__nav-item'>
-							<Link to='/tv-show'>TV Show</Link>
+							<Link to='/tv'>TV Show</Link>
 						</li>
 					</ul>
 				</div>
@@ -37,18 +37,18 @@ const Footer = () => {
 				<div className='footer__social'>
 					<ul className='footer__social-list'>
 						<li className='footer__social-item'>
-							<a href='https://www.facebook.com/'>
+							<a href={facebookLink}>
 								<i className='fab fa-facebook-f'></i>
 							</a>
 						</li>
 						<li className='footer__social-item'>
-							<a href='https://www.linkedin.com/'>
+							<a href={linkedInLink}>
 								{/* linkedIn */}
 								<i className='fab fa-linkedin'></i>
 							</a>
 						</li>
 						<li className='footer__social-item'>
-							<a href='https://github.com'>
+							<a href={githubLink}>
 								{/* github */}
 								<i className='fab fa-github'></i>
 							</a>

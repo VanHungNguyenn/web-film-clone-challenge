@@ -9,6 +9,7 @@
 	&__image {
 		flex: 1;
 		position: relative;
+		max-height: 300px;
 
 		img {
 			width: 100%;
@@ -68,6 +69,9 @@
 		font-weight: 600;
 		color: var(--white-color);
 		margin-bottom: 1rem;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 
 		&:hover {
 			color: var(--primary-color);

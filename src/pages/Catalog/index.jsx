@@ -1,30 +1,19 @@
 import React from 'react'
 import './Catalog.scss'
-import MovieCard from '~/components/MovieCard'
+
+import MovieGridView from '~/components/MovieGridView'
 
 const Catalog = () => {
+	const category = window.location.href.split('/')[3]
+
 	return (
 		<div className='catalog'>
 			<div className='catalog__wrapper wrapper'>
-				<h2 className='catalog__title'>Movie</h2>
-				<div className='catalog__search'>
-					<input type='text' placeholder='Search movie' />
-					{/* button */}
-					<button className='catalog__button button button--large button--primary'>
-						Search
-					</button>
-				</div>
-				<div className='catalog__gridview'>
-					<MovieCard />
-					<MovieCard />
-					<MovieCard />
-					<MovieCard />
-					<MovieCard />
-				</div>
-				{/* button loadmore */}
-				<button className='catalog__loadmore button button--large button--primary'>
-					Load more...
-				</button>
+				<h2 className='catalog__title'>
+					{category === 'movie' ? 'Movies' : 'TV Shows'}
+				</h2>
+
+				<MovieGridView category={category} />
 			</div>
 		</div>
 	)

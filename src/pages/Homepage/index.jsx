@@ -8,12 +8,31 @@ const Homepage = () => {
 		<div className='homepage'>
 			<div className='homepage__wrapper wrapper'>
 				<Banner />
-				<MovieList title='Trending Movies' />
-				<MovieList title='Top Rated Movies' />
-				<MovieList title='Upcoming Movies' />
-				<MovieList title='Treanding TV Shows' />
-				<MovieList title='Top Rated TV Shows' />
-				<MovieList title='Upcoming TV Shows' />
+				<MovieList
+					category='movie'
+					type='popular'
+					title='Now Playing Movies'
+				/>
+				<MovieList
+					category='movie'
+					type='top_rated'
+					title='Top Rated Movies'
+				/>
+				<MovieList
+					title='Upcoming Movies'
+					category='movie'
+					type='upcoming'
+				/>
+				<MovieList
+					title='Popular TV Shows'
+					category='tv'
+					type='popular'
+				/>
+				<MovieList
+					title='Top Rated TV Shows'
+					category='tv'
+					type='top_rated'
+				/>
 			</div>
 		</div>
 	)
