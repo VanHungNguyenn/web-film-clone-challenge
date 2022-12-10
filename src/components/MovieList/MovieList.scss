@@ -1,0 +1,32 @@
+.movieList {
+	margin-top: 5rem;
+	margin-bottom: 5rem;
+
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 3rem;
+	}
+
+	&__title {
+		font-size: 2.5rem;
+		font-weight: 600;
+		color: var(--white-color);
+
+		border-left: 8px solid var(--primary-color);
+
+		padding-left: 1rem;
+	}
+
+	&__grid {
+		display: grid;
+		gap: 2rem;
+		grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+	}
+}

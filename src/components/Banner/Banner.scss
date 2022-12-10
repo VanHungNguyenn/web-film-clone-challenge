@@ -1,0 +1,11 @@
+.banner {
+	&__wrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__slide {
+		width: 100%;
+	}
+}

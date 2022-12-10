@@ -1,0 +1,142 @@
+.movieDetail {
+	max-height: calc(100vh - var(--height-header));
+	width: 100%;
+	display: flex;
+
+	position: relative;
+
+	height: 60rem;
+
+	&__background {
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+		filter: brightness(50%);
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+	}
+
+	&__wrapper {
+		display: flex;
+		align-items: flex-end;
+		margin-bottom: 2rem;
+	}
+
+	&__poster {
+		min-width: 20rem;
+		height: auto;
+		margin-right: 4rem;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		color: var(--white-color);
+	}
+
+	&__title {
+		font-size: 3.5rem;
+		margin-bottom: 1rem;
+	}
+
+	&__details {
+		display: flex;
+		align-items: center;
+		margin-bottom: 2rem;
+		gap: 2rem;
+
+		&--star {
+			i {
+				color: var(--primary-color);
+				margin-right: 0.5rem;
+			}
+		}
+
+		&--hd {
+			border: 1px solid var(--white-color);
+			padding: 0.2rem 0.5rem;
+			font-weight: 600;
+		}
+
+		&--year {
+			font-weight: 600;
+		}
+	}
+
+	&__desc {
+		margin-bottom: 2rem;
+
+		span {
+			font-weight: bold;
+			color: var(--primary-color);
+		}
+	}
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		margin-bottom: 2rem;
+
+		span {
+			font-weight: bold;
+			color: var(--primary-color);
+		}
+	}
+
+	&__tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin-bottom: 2rem;
+	}
+
+	&__tag {
+		background-color: var(--white-color);
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+		color: #000;
+	}
+
+	&__trailers {
+		display: flex;
+		flex-direction: column;
+
+		justify-content: center;
+
+		margin-top: 5rem;
+		margin-bottom: 10rem;
+	}
+
+	&__trailer {
+		display: flex;
+		flex-direction: column;
+
+		&--title {
+			font-size: 2.5rem;
+			font-weight: 600;
+			color: var(--white-color);
+			border-left: 8px solid var(--primary-color);
+			padding-left: 1rem;
+			margin-bottom: 3rem;
+		}
+
+		&--video {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+}

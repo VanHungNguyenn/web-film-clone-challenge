@@ -1,0 +1,17 @@
+.title__wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 3rem;
+}
+
+.title {
+	font-size: 2.5rem;
+	font-weight: 600;
+	color: var(--white-color);
+
+	border-left: 8px solid var(--primary-color);
+
+	padding-left: 1rem;
+}
