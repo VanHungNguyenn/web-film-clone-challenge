@@ -2,17 +2,22 @@ import React from 'react'
 import './MovieCard.scss'
 import apiConfig from '~/api/apiConfig'
 import { Link } from 'react-router-dom'
+import { noImage } from '~/constants'
 
 const MovieCard = ({ movieItem, cate }) => {
 	return (
 		<>
 			<div className='movieCard'>
-				<div className='movieCard__image'>
+				<div className='movieCard__image fade-in'>
 					<img
-						src={apiConfig.w500Image(movieItem?.poster_path)}
+						src={
+							movieItem?.poster_path === null
+								? noImage
+								: apiConfig.w500Image(movieItem?.poster_path)
+						}
 						alt='movie poster'
 					/>
-					<Link to={`${cate}/${movieItem?.id}`}>
+					<Link to={`/${cate}/${movieItem?.id}`}>
 						<div className='movieCard__image--button'>
 							<i className='fa-regular fa-circle-play'></i>
 						</div>
@@ -20,7 +25,7 @@ const MovieCard = ({ movieItem, cate }) => {
 				</div>
 				<div className='movieCard__content'>
 					<h3 className='movieCard__title'>
-						<Link to={`${cate}/${movieItem.id}`}>
+						<Link to={`/${cate}/${movieItem.id}`}>
 							{movieItem?.title || movieItem?.name}
 						</Link>
 					</h3>
@@ -37,7 +42,7 @@ const MovieCard = ({ movieItem, cate }) => {
 					</div>
 					<div className='movieCard__button button button--100'>
 						<i className='fa fa-play'></i>
-						<Link to={`${cate}/${movieItem?.id}`}>
+						<Link to={`/${cate}/${movieItem?.id}`}>
 							<span>Watch now</span>
 						</Link>
 					</div>

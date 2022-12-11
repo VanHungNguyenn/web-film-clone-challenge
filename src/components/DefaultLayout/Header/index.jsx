@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Header.scss'
 
 import { Link } from 'react-router-dom'
@@ -9,6 +9,26 @@ const Header = () => {
 
 	const handleToggleMenu = () => {
 		setToggleMenu(!toggleMenu)
+	}
+
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth > 768) {
+				setToggleMenu(false)
+			}
+		}
+
+		window.addEventListener('resize', handleResize)
+		return () => {
+			window.removeEventListener('resize', handleResize)
+		}
+	}, [])
+
+	// if click navbar, close menu
+	const handleNavbarClick = () => {
+		if (window.innerWidth < 768) {
+			setToggleMenu(false)
+		}
 	}
 
 	return (
@@ -22,13 +42,22 @@ const Header = () => {
 				<div className={`header__menu ${toggleMenu ? 'active' : ''}`}>
 					<nav className='header__nav'>
 						<ul className='header__nav-list'>
-							<li className='header__nav-item'>
+							<li
+								className='header__nav-item'
+								onClick={handleNavbarClick}
+							>
 								<Link to='/'>Home</Link>
 							</li>
-							<li className='header__nav-item'>
+							<li
+								className='header__nav-item'
+								onClick={handleNavbarClick}
+							>
 								<Link to='/movie'>Movie</Link>
 							</li>
-							<li className='header__nav-item'>
+							<li
+								className='header__nav-item'
+								onClick={handleNavbarClick}
+							>
 								<Link to='/tv'>TV Show</Link>
 							</li>
 						</ul>
@@ -45,9 +74,9 @@ const Header = () => {
 				</div>
 				<div className='header__bar' onClick={handleToggleMenu}>
 					{toggleMenu ? (
-						<i className='fas fa-bars'></i>
-					) : (
 						<i className='fas fa-times'></i>
+					) : (
+						<i className='fas fa-bars'></i>
 					)}
 				</div>
 			</div>

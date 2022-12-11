@@ -2,25 +2,38 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import tmdbApi from '~/api/tmdbApi'
 import MovieCard from '~/components/MovieCard'
+import MovieCardListView from '~/components/MovieCardListView'
+import Loading from '~/components/Loading'
+import PullToRefresh from 'react-simple-pull-to-refresh'
 
 const MovieGridView = ({ category }) => {
 	const [items, setItems] = useState([])
 	const [page, setPage] = useState(1)
 	const [totalPage, setTotalPage] = useState(0)
+	const [loading, setLoading] = useState(false)
+	const [view, setView] = useState('grid')
+	// tab bar for movie: upcoming, popular, top rated, now playing
+	// tab bar for tv: popular, top rated, on the air, airing today
+	const [tabBarMovies, setTabBarMovies] = useState('upcoming')
+	const [tabBarTv, setTabBarTv] = useState('popular')
 
 	const { keyword } = useParams()
 
-	useEffect(() => {
-		const getList = async () => {
+	const getList = useCallback(async () => {
+		try {
 			let response = null
+
+			setLoading(true)
 
 			if (keyword === undefined) {
 				const params = {}
 
 				if (category === 'movie') {
-					response = await tmdbApi.getMoviesList('upcoming', params)
+					response = await tmdbApi.getMoviesList(tabBarMovies, {
+						params,
+					})
 				} else {
-					response = await tmdbApi.getTvList('popular', params)
+					response = await tmdbApi.getTvList(tabBarTv, { params })
 				}
 			} else {
 				const params = { query: keyword }
@@ -30,10 +43,16 @@ const MovieGridView = ({ category }) => {
 
 			setItems(response.results)
 			setTotalPage(response.total_pages)
-		}
 
+			setLoading(false)
+		} catch (error) {
+			console.log('Failed to fetch movie list: ', error)
+		}
+	}, [category, keyword, tabBarMovies, tabBarTv])
+
+	useEffect(() => {
 		getList()
-	}, [category, keyword])
+	}, [getList])
 
 	const loadMore = async () => {
 		let response = null
@@ -42,9 +61,9 @@ const MovieGridView = ({ category }) => {
 			const params = { page: page + 1 }
 
 			if (category === 'movie') {
-				response = await tmdbApi.getMoviesList('upcoming', params)
+				response = await tmdbApi.getMoviesList(tabBarMovies, { params })
 			} else {
-				response = await tmdbApi.getTvList('popular', params)
+				response = await tmdbApi.getTvList(tabBarTv, { params })
 			}
 		} else {
 			const params = { query: keyword, page: page + 1 }
@@ -59,11 +78,116 @@ const MovieGridView = ({ category }) => {
 	return (
 		<>
 			<MovieSearch category={category} key={keyword} />
-			<div className='catalog__gridview'>
-				{items.map((item) => (
-					<MovieCard key={item.id} movieItem={item} cate={category} />
-				))}
+			{/* gridview button and listview button */}
+			<div className='catalog__view'>
+				<button
+					className={`catalog__view-button  ${
+						view === 'grid' ? 'catalog__view-button--active' : ''
+					}`}
+					onClick={() => setView('grid')}
+				>
+					{/* font-awesome */}
+					<i className='fas fa-th-large'></i>
+				</button>
+				<button
+					className={`catalog__view-button ${
+						view === 'list' ? 'catalog__view-button--active' : ''
+					}`}
+					onClick={() => setView('list')}
+				>
+					<i className='fas fa-list'></i>
+				</button>
 			</div>
+			{/* tab bar */}
+			<div className='catalog__tab-bar'>
+				{category === 'movie' ? (
+					<>
+						<button
+							className={`catalog__tab-bar-button ${
+								tabBarMovies === 'upcoming'
+									? 'catalog__tab-bar-button--active'
+									: ''
+							}`}
+							onClick={() => setTabBarMovies('upcoming')}
+						>
+							Upcoming
+						</button>
+						<button
+							className={`catalog__tab-bar-button ${
+								tabBarMovies === 'popular'
+									? 'catalog__tab-bar-button--active'
+									: ''
+							}`}
+							onClick={() => setTabBarMovies('popular')}
+						>
+							Popular
+						</button>
+						<button
+							className={`catalog__tab-bar-button ${
+								tabBarMovies === 'top_rated'
+									? 'catalog__tab-bar-button--active'
+									: ''
+							}`}
+							onClick={() => setTabBarMovies('top_rated')}
+						>
+							Top Rated
+						</button>
+					</>
+				) : (
+					<>
+						<button
+							className={`catalog__tab-bar-button ${
+								tabBarTv === 'popular'
+									? 'catalog__tab-bar-button--active'
+									: ''
+							}`}
+							onClick={() => setTabBarTv('popular')}
+						>
+							Popular
+						</button>
+						<button
+							className={`catalog__tab-bar-button ${
+								tabBarTv === 'top_rated'
+									? 'catalog__tab-bar-button--active'
+									: ''
+							}`}
+							onClick={() => setTabBarTv('top_rated')}
+						>
+							Top Rated
+						</button>
+					</>
+				)}
+			</div>
+
+			<PullToRefresh onRefresh={getList}>
+				{items.length > 0 ? (
+					view === 'grid' ? (
+						<div className='catalog__gridview'>
+							{items.map((item) => (
+								<MovieCard
+									key={item.id}
+									movieItem={item}
+									cate={category}
+								/>
+							))}
+						</div>
+					) : (
+						<div className='catalog__listview'>
+							{items.map((item) => (
+								<MovieCardListView
+									key={item.id}
+									movieItem={item}
+									cate={category}
+								/>
+							))}
+						</div>
+					)
+				) : loading ? (
+					<Loading />
+				) : (
+					''
+				)}
+			</PullToRefresh>
 			{/* button loadmore */}
 			{page < totalPage && (
 				<button
@@ -85,6 +209,8 @@ const MovieSearch = ({ category, keyword: key }) => {
 	const handleSearch = useCallback(() => {
 		if (keyword.trim().length > 0) {
 			navigate(`/${category}/search/${keyword}`)
+		} else {
+			navigate(`/${category}`)
 		}
 	}, [category, keyword, navigate])
 

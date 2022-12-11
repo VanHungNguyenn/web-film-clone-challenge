@@ -77,13 +77,20 @@ const SlideItem = ({ movieItem }) => {
 	return (
 		<div className='banner-slide'>
 			<div className='banner__banner'>
-				<img src={background} alt='banner' />
+				<img
+					src={background}
+					alt='banner'
+					loading='lazy'
+					className='fade-in'
+				/>
 			</div>
 			<div className='banner__content'>
 				<div className='banner__content--poster'>
 					<img
 						src={apiConfig.w500Image(movieItem.poster_path)}
 						alt='poster'
+						loading='lazy'
+						className='fade-in'
 					/>
 				</div>
 

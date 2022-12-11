@@ -3,10 +3,6 @@ import './Title.scss'
 import { Link } from 'react-router-dom'
 
 const Title = ({ title, cate, type }) => {
-	if (cate === 'tv') {
-		cate = 'tv-show'
-	}
-
 	return (
 		<>
 			<div className='title__wrapper'>
