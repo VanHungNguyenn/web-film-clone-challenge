@@ -11,9 +11,7 @@ const MovieGridView = ({ category }) => {
 	const [page, setPage] = useState(1)
 	const [totalPage, setTotalPage] = useState(0)
 	const [loading, setLoading] = useState(false)
-	const [view, setView] = useState('grid')
-	// tab bar for movie: upcoming, popular, top rated, now playing
-	// tab bar for tv: popular, top rated, on the air, airing today
+	const [view, setView] = useState(localStorage.getItem('view') || 'grid')
 	const [tabBarMovies, setTabBarMovies] = useState('upcoming')
 	const [tabBarTv, setTabBarTv] = useState('popular')
 
@@ -84,7 +82,10 @@ const MovieGridView = ({ category }) => {
 					className={`catalog__view-button  ${
 						view === 'grid' ? 'catalog__view-button--active' : ''
 					}`}
-					onClick={() => setView('grid')}
+					onClick={() => {
+						setView('grid')
+						localStorage.setItem('view', 'grid')
+					}}
 				>
 					{/* font-awesome */}
 					<i className='fas fa-th-large'></i>
@@ -93,7 +94,10 @@ const MovieGridView = ({ category }) => {
 					className={`catalog__view-button ${
 						view === 'list' ? 'catalog__view-button--active' : ''
 					}`}
-					onClick={() => setView('list')}
+					onClick={() => {
+						setView('list')
+						localStorage.setItem('view', 'list')
+					}}
 				>
 					<i className='fas fa-list'></i>
 				</button>
