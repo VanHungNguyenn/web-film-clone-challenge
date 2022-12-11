@@ -50,3 +50,9 @@ The following **additional** features are implemented:
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+## Information
+
+Name: Nguyen Van Hung
+Phone: 0332305444
+Info contact: https://github.com/VanHungNguyenn
