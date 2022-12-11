@@ -53,6 +53,6 @@ The following **additional** features are implemented:
 
 ## Information
 
-Name: Nguyen Van Hung
-Phone: 0332305444
-Info contact: https://github.com/VanHungNguyenn
+**Name**: Nguyen Van Hung
+**Phone**: 0332305444
+**Contact**: https://github.com/VanHungNguyenn
