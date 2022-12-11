@@ -20,9 +20,9 @@ const VideoList = ({ id, category }) => {
 	return (
 		<>
 			<div className='wrapper movieDetail__trailers'>
-				{listVideo.map((video, index) => (
-					<Video key={index} video={video} />
-				))}
+				{listVideo.map((video, index) => {
+					return <Video key={index} video={video} />
+				})}
 			</div>
 		</>
 	)
@@ -41,6 +41,7 @@ const Video = ({ video }) => {
 			<h3 className='movieDetail__trailer--title'>
 				{video.name} - {video.type}
 			</h3>
+
 			<div className='movieDetail__trailer--video'>
 				<iframe
 					width='1000'

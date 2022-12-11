@@ -47,7 +47,7 @@ const MovieDetail = () => {
 							</div>
 							<div className='movieDetail__content'>
 								<h1 className='movieDetail__title'>
-									{item.title}
+									{item.title || item.name}
 								</h1>
 								<div className='movieDetail__details'>
 									<div className='movieDetail__details--star'>
